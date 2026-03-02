@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Évaluation économique en santé</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bleu: #1a3557;
+      --bleu-clair: #2c5282;
+      --or: #b8962e;
+      --gris-clair: #f5f4f0;
+      --gris-texte: #444;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      background: var(--gris-clair);
+      color: var(--gris-texte);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--bleu);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg, transparent, transparent 80px,
+        rgba(255,255,255,0.025) 80px, rgba(255,255,255,0.025) 81px
+      );
+    }
+
+    .header-inner {
+      position: relative;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .seminaire-label {
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 1.4rem;
+    }
+
+    h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: white;
+      margin-bottom: 1.2rem;
+    }
+
+    .header-rule {
+      width: 48px;
+      height: 2px;
+      background: var(--or);
+      margin: 0 auto 1.2rem;
+    }
+
+    .header-subtitle {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.03em;
+    }
+
+    .header-organisateurs {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.08em;
+      margin-top: 0.45rem;
+      font-style: italic;
+      font-family: 'EB Garamond', serif;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+    }
+
+    /* INTRO */
+    .intro {
+      background: white;
+      border-left: 3px solid var(--or);
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2.5rem;
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: #555;
+      font-family: 'EB Garamond', serif;
+    }
+
+    /* SECTION TITRE */
+    .section-title {
+      font-weight: 500;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bleu-clair);
+      margin-bottom: 1rem;
+    }
+
+    /* SÉANCES */
+    .seances {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .seance {
+      background: white;
+      border: 1px solid #e0ddd5;
+      border-radius: 2px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .seance:hover {
+      box-shadow: 0 2px 12px rgba(26,53,87,0.08);
+      border-color: #c8c4b8;
+    }
+
+    .seance-date {
+      min-width: 72px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .seance-jour {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--bleu);
+      line-height: 1;
+    }
+
+    .seance-mois {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--or);
+    }
+
+    .seance-divider {
+      width: 1px;
+      height: 44px;
+      background: #e0ddd5;
+      flex-shrink: 0;
+    }
+
+    .seance-content { flex: 1; }
+
+    .seance-titre {
+      font-size: 0.97rem;
+      font-weight: 400;
+      color: #222;
+      margin-bottom: 0.25rem;
+    }
+
+    .seance-heure {
+      font-size: 0.8rem;
+      color: #888;
+      font-weight: 300;
+    }
+
+    /* BOUTONS PAR SÉANCE */
+    .seance-actions {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-end;
+    }
+
+    .btn-zoom {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--bleu);
+      color: white;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 0.45rem 0.9rem;
+      border-radius: 2px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-zoom:hover { background: var(--bleu-clair); }
+
+    .btn-zoom svg {
+      width: 14px; height: 14px;
+      fill: currentColor;
+    }
+
+    .btn-inscrire {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: var(--or);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 2px;
+      border: 1px solid var(--or);
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-inscrire:hover { background: var(--or); color: white; }
+
+    .btn-inscrire svg {
+      width: 12px; height: 12px;
+      fill: currentColor;
+    }
+
+    /* CONTACT */
+    .contact {
+      font-size: 0.85rem;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    .contact a { color: var(--bleu-clair); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bleu);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      font-size: 0.75rem;
+      padding: 1.4rem;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 580px) {
+      .seance { flex-wrap: wrap; gap: 0.8rem; }
+      .seance-divider { display: none; }
+      .seance-actions { width: 100%; flex-direction: row; }
+      .btn-zoom, .btn-inscrire { flex: 1; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="seminaire-label">Séminaire de recherche</div>
+    <h1>Évaluation économique en santé :<br>nouvelles questions, nouveaux développements</h1>
+    <div class="header-rule"></div>
+    <div class="header-subtitle">Séminaire dématérialisé &nbsp;·&nbsp; Accès libre sur inscription</div>
+    <div class="header-organisateurs"><u>Organisateurs :</u> Antoine Bénard (Université de Bordeaux), Valérie Clément (Université de Montpellier), Marc D’Elbée (Université de Bordeaux), Fabienne Midy (HAS, sous réserve), Clémence Thébaut (Université de Bordeaux), Philippe Tessier (Université de Nantes), Jérome Wittwer (Université de Bordeaux)</div>
+  </div>
+</header>
+
+<main>
+
+  <p class="intro">
+    L’objectif de ce séminaire est d’ouvrir un espace universitaire commun, entre chercheurs et évaluateurs, spécialisés sur ces méthodes, pour discuter des questions scientifiques et normatives qu’elles soulèvent.<br>
+Les premières séances auront lieu par Zoom, aux dates et sur les thèmes indiqués ci-dessous. <br>
+Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre aux organisateurs de compter le nombre de participants.
+  </p>
+
+  <div class="section-title">Programme des séances</div>
+
+  <div class="seances">
+
+    <!-- SÉANCE 1 -->
+    <div class="seance">
+      <div class="seance-date">
+        <div class="seance-jour">27</div>
+        <div class="seance-mois">Mars 2026</div>
+      </div>
+      <div class="seance-divider"></div>
+      <div class="seance-content">
+        <div class="seance-titre">Que faire du EQ-5L-5L? avec la participation de <u>Julie Chevalier</u> (Vyoo Agency) et <u>Gérard De Pouvourville</u> (ESSEC)</div>
+        <div class="seance-heure">14h00 – 15h30</div>
+      </div>
+      <div class="seance-actions">
+        <a href="https://u-bordeaux-fr.zoom.us/meeting/register/8YYNKZRiTtC_Ni0UGbAmgg" class="btn-zoom">
+          <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+          Rejoindre
+        </a>
+        <a href="https://framaforms.org/seminaire-evaluation-economique-27-mars-2026-1772444521" class="btn-inscrire">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          S'inscrire
+        </a>
+      </div>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="seance">
+      <div class="seance-date">
+        <div class="seance-jour">17</div>
+        <div class="seance-mois">Avril 2026</div>
+      </div>
+      <div class="seance-divider"></div>
+      <div class="seance-content">
+        <div class="seance-titre">L'analyse de la valeur de l’information avec la participation <u>d’Antoine Bénard</u> (CHU et Université de Bordeaux, BPH)</div>
+        <div class="seance-heure">14h00 – 15h30</div>
+      </div>
+      <div class="seance-actions">
+        <a href="https://u-bordeaux-fr.zoom.us/meeting/register/RkT3DRGdSOCgN-DMZx4BMw" class="btn-zoom">
+          <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+          Rejoindre
+        </a>
+        <a href="https://framaforms.org/seminaire-evaluation-economique-17-avril-2026-1772455254" class="btn-inscrire">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          S'inscrire
+        </a>
+      </div>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="seance">
+      <div class="seance-date">
+        <div class="seance-jour">27</div>
+        <div class="seance-mois">Mai 2026</div>
+      </div>
+      <div class="seance-divider"></div>
+      <div class="seance-content">
+        <div class="seance-titre">En attente de confirmation</div>
+        <div class="seance-heure">14h00 – 15h30</div>
+      </div>
+<!--      
+<div class="seance-actions">
+        <a href="#" class="btn-zoom">
+          <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+          Rejoindre
+        </a>
+        <a href="#" class="btn-inscrire">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          S'inscrire
+        </a>
+      </div>
+-->
+    </div>
+
+  <!-- SÉANCE 4 -->
+    <div class="seance">
+      <div class="seance-date">
+        <div class="seance-jour">26</div>
+        <div class="seance-mois">Juin 2026</div>
+      </div>
+      <div class="seance-divider"></div>
+      <div class="seance-content">
+        <div class="seance-titre">Proportional, absolute shortfall, Severity modifier en Grande-Bretagne, avec la participation de <u>Aki Tsuchiya</u> (Sheffield University, SCHARR)</div>
+        <div class="seance-heure">14h00 – 15h30</div>
+      </div>
+      <div class="seance-actions">
+        <a href="https://framaforms.org/seminaire-evaluation-economique-26-juin-2026-1772455854" class="btn-zoom">
+          <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+          Rejoindre
+        </a>
+        <a href="https://u-bordeaux-fr.zoom.us/meeting/register/xIDrEGNbT860V4Ezh5gxuQ" class="btn-inscrire">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          S'inscrire
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <!-- CONTACT -->
+<div class="section-title">Contact</div>
+  <div class="contact">
+    Pour toute question : <a href="mailto:clemence.thebaut@u-bordeaux.fr">Clémence Thébaut (Université de Bordeaux)</a>
+    </div>
+
+</main>
+
+<footer>
+  Séminaire « Évaluation économique en santé »
+</footer>
+
+</body>
+</html>
