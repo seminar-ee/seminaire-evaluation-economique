@@ -216,10 +216,7 @@
 
     .btn-zoom:hover { background: var(--bleu-clair); }
 
-    .btn-zoom svg {
-      width: 14px; height: 14px;
-      fill: currentColor;
-    }
+    .btn-zoom svg { width: 14px; height: 14px; fill: currentColor; }
 
     .btn-inscrire {
       display: inline-flex;
@@ -241,10 +238,7 @@
 
     .btn-inscrire:hover { background: var(--or); color: white; }
 
-    .btn-inscrire svg {
-      width: 12px; height: 12px;
-      fill: currentColor;
-    }
+    .btn-inscrire svg { width: 12px; height: 12px; fill: currentColor; }
 
     /* CONTACT */
     .contact {
@@ -255,22 +249,51 @@
 
     .contact a { color: var(--bleu-clair); }
 
-    /* FOOTER */
+    /* FOOTER LOGOS */
     footer {
-      background: var(--bleu);
-      color: rgba(255,255,255,0.45);
+      background: white;
+      border-top: 1px solid #e0ddd5;
+      padding: 0.5rem 2rem 1.5rem;
       text-align: center;
-      font-size: 0.75rem;
-      padding: 1.4rem;
-      letter-spacing: 0.04em;
     }
+
+    .footer-table {
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    .footer-table td {
+      border: none;
+      padding: 0 1.8rem;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .footer-table td + td {
+      border-left: 1px solid #e8e5df;
+    }
+
+    .footer-table td img {
+  display: block;
+  max-height: 150px;
+  max-width: 450px;
+  width: auto;
+     }
 
     @media (max-width: 580px) {
       .seance { flex-wrap: wrap; gap: 0.8rem; }
       .seance-divider { display: none; }
       .seance-actions { width: 100%; flex-direction: row; }
       .btn-zoom, .btn-inscrire { flex: 1; justify-content: center; }
+      .footer-table td { padding: 0 0.8rem; }
+      .footer-table td img { max-width: 80px; max-height: 36px; }
     }
+
+    .img-hope {
+      height: 100px;  /* augmente seulement celle-ci */
+      width: auto;
+    }
+
   </style>
 </head>
 <body>
@@ -281,14 +304,14 @@
     <h1>Évaluation économique en santé :<br>nouvelles questions, nouveaux développements</h1>
     <div class="header-rule"></div>
     <div class="header-subtitle">Séminaire dématérialisé &nbsp;·&nbsp; Accès libre sur inscription</div>
-    <div class="header-organisateurs"><u>Organisateurs :</u> Antoine Bénard (CHU de Bordeaux), Valérie Clément (Université de Montpellier), Marc D’Elbée (Université de Bordeaux), Fabienne Midy (HAS), Clémence Thébaut (Université de Bordeaux), Philippe Tessier (Université de Nantes), Jérome Wittwer (Université de Bordeaux)</div>
+    <div class="header-organisateurs"><u>Organisateurs :</u> Antoine Bénard (CHU de Bordeaux), Valérie Clément (Université de Montpellier), Marc D'Elbée (Université de Bordeaux), Fabienne Midy (HAS), Clémence Thébaut (Université de Bordeaux), Philippe Tessier (Université de Nantes), Jérome Wittwer (Université de Bordeaux)</div>
   </div>
 </header>
 
 <main>
 
   <p class="intro">
-    L’objectif de ce séminaire est d’ouvrir un espace universitaire commun, entre chercheurs et évaluateurs, spécialisés sur ces méthodes, pour discuter des questions scientifiques et normatives qu’elles soulèvent.<br>
+    L'objectif de ce séminaire est d'ouvrir un espace universitaire commun, entre chercheurs et évaluateurs, spécialisés sur ces méthodes, pour discuter des questions scientifiques et normatives qu'elles soulèvent.<br>
 Les premières séances auront lieu par Zoom, aux dates et sur les thèmes indiqués ci-dessous. <br>
 Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre aux organisateurs de compter le nombre de participants.
   </p>
@@ -328,7 +351,7 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
       </div>
       <div class="seance-divider"></div>
       <div class="seance-content">
-        <div class="seance-titre">L'analyse de la valeur de l’information avec la participation <u>d’Antoine Bénard</u> (CHU et Université de Bordeaux, BPH)</div>
+        <div class="seance-titre">L'analyse de la valeur de l'information avec la participation <u>d'Antoine Bénard</u> (CHU et Université de Bordeaux, BPH)</div>
         <div class="seance-heure">15h00 – 16h30</div>
       </div>
       <div class="seance-actions">
@@ -343,8 +366,7 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
       </div>
     </div>
 
-    
-  <!-- SÉANCE 3 -->
+    <!-- SÉANCE 3 -->
     <div class="seance">
       <div class="seance-date">
         <div class="seance-jour">26</div>
@@ -367,7 +389,7 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
       </div>
     </div>
 
-<!-- SÉANCE 4 -->
+    <!-- SÉANCE 4 -->
     <div class="seance">
       <div class="seance-date">
         <div class="seance-jour">25</div>
@@ -378,8 +400,7 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
         <div class="seance-titre">Benefit-cost analysis and animal welfare, Toulouse School of economics, avec la participation de <u>Nicolas Treich</u> (INRAE)</div>
         <div class="seance-heure">15h00 – 16h30</div>
       </div>
-      
-<div class="seance-actions">
+      <div class="seance-actions">
         <a href="https://u-bordeaux-fr.zoom.us/meeting/register/TcnXVVc0RD2FPFw36NDiZw" class="btn-zoom">
           <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
           Rejoindre
@@ -391,7 +412,7 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
       </div>
     </div>
 
-<!-- SÉANCE 5 -->
+    <!-- SÉANCE 5 -->
     <div class="seance">
       <div class="seance-date">
         <div class="seance-jour">13</div>
@@ -402,8 +423,7 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
         <div class="seance-titre">Consistent Valuation of a Reduction in Mortality Risk using Values per Life, Life Year, and Quality-Adjusted Life Year, avec la participation de <u>James K. Hammitt</u>, Chaire INRAE - Toulouse School of economics, Harvard University</div>
         <div class="seance-heure">15h00 – 16h30</div>
       </div>
-      
-<div class="seance-actions">
+      <div class="seance-actions">
         <a href="https://u-bordeaux-fr.zoom.us/meeting/register/RLcGJDUnSeGi15nkhbI96Q" class="btn-zoom">
           <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
           Rejoindre
@@ -415,25 +435,27 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
       </div>
     </div>
 
-
   </div>
 
-
-
-
   <!-- CONTACT -->
-<div class="section-title">Contact</div>
+  <div class="section-title">Contact</div>
   <div class="contact">
     Pour toute question : <a href="mailto:clemence.thebaut@u-bordeaux.fr">Clémence Thébaut (Université de Bordeaux)</a>
-    </div>
-<div class="contact">
-    Mise à jour : 03/03/2026 10:40</a>
-    </div>
+  </div>
+  <div class="contact">
+    Mise à jour : 03/03/2026 10:40
+  </div>
 
 </main>
 
+<!-- LOGOS -->
+
 <footer>
-  Séminaire « Évaluation économique en santé »
+  <table class="footer-table">
+    <tr>
+      <td><img src="Blocmarque HOPE English.jpg" alt="HOPE - Université de Bordeaux" class="img-hope" /></td>
+      </tr>
+  </table>
 </footer>
 
 </body>
