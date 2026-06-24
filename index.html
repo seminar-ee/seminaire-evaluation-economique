@@ -240,6 +240,29 @@
 
     .btn-inscrire svg { width: 12px; height: 12px; fill: currentColor; }
 
+    .btn-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: var(--bleu-clair);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 2px;
+      border: 1px solid var(--bleu-clair);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+
+    .btn-resume:hover { background: var(--bleu-clair); color: white; }
+
+    .btn-resume svg { width: 12px; height: 12px; fill: currentColor; }
+
     /* BOUTONS DÉSACTIVÉS APRÈS LA SÉANCE */
     .btn-disabled {
       background: #d6d6d6 !important;
@@ -255,69 +278,137 @@
       color: #777 !important;
     }
 
-.videos-highlight {
-  background: rgba(26,53,87,0.04);
-  border-left: 3px solid var(--or);
-  padding: 1.5rem;
-  margin: -0.5rem 0 2.8rem;
-  text-align: center;
-}
+    /* =============================================
+       RÉSUMÉ
+       ============================================= */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 53, 87, 0.55);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
 
-.videos-label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--bleu-clair);
-  font-weight: 500;
-  margin-bottom: 0.9rem;
-}
+    .modal-overlay.active {
+      display: flex;
+    }
 
-.btn-videos-large {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
+    .modal-box {
+      background: white;
+      max-width: 640px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-radius: 2px;
+      box-shadow: 0 8px 40px rgba(26,53,87,0.22);
+      display: flex;
+      flex-direction: column;
+    }
 
-  background: var(--bleu);
-  color: white;
-  text-decoration: none;
+    .modal-header {
+      background: var(--bleu);
+      color: white;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
 
-  padding: 0.9rem 1.4rem;
-  border-radius: 2px;
+    .modal-header-text { flex: 1; }
 
-  font-size: 0.92rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
+    .modal-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 0.35rem;
+    }
 
-  transition:
-    transform 0.15s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
-}
+    .modal-titre {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
 
-.btn-videos-large:hover {
-  background: var(--bleu-clair);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(26,53,87,0.15);
-}
+    .modal-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      padding: 0.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: color 0.15s;
+    }
 
-.btn-videos-large svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
+    .modal-close:hover { color: white; }
 
-.videos-subtitle {
-  margin-top: 0.9rem;
-  font-size: 0.82rem;
-  color: #777;
-  font-style: italic;
-  font-family: 'EB Garamond', serif;
-}
+    .modal-close svg { width: 18px; height: 18px; fill: currentColor; display: block; }
 
-    /* BOUTON VIDÉOS */
-    .videos-link-container {
+    .modal-body {
+      padding: 1.5rem;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #444;
+      border-left: 3px solid var(--or);
+      margin: 1.2rem;
+      padding-left: 1.2rem;
+    }
+
+    .videos-highlight {
+      background: rgba(26,53,87,0.04);
+      border-left: 3px solid var(--or);
+      padding: 1.5rem;
+      margin: -0.5rem 0 2.8rem;
       text-align: center;
-      margin: -0.5rem 0 2.5rem;
+    }
+
+    .videos-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--bleu-clair);
+      font-weight: 500;
+      margin-bottom: 0.9rem;
+    }
+
+    .btn-videos-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--bleu);
+      color: white;
+      text-decoration: none;
+      padding: 0.9rem 1.4rem;
+      border-radius: 2px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-videos-large:hover {
+      background: var(--bleu-clair);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(26,53,87,0.15);
+    }
+
+    .btn-videos-large svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .videos-subtitle {
+      margin-top: 0.9rem;
+      font-size: 0.82rem;
+      color: #777;
+      font-style: italic;
+      font-family: 'EB Garamond', serif;
     }
 
     .btn-videos {
@@ -332,10 +423,7 @@
       transition: all 0.2s;
     }
 
-    .btn-videos:hover {
-      background: var(--bleu);
-      color: white;
-    }
+    .btn-videos:hover { background: var(--bleu); color: white; }
 
     /* CONTACT */
     .contact {
@@ -371,26 +459,25 @@
     }
 
     .footer-table td img {
-  display: block;
-  max-height: 150px;
-  max-width: 450px;
-  width: auto;
-     }
+      display: block;
+      max-height: 150px;
+      max-width: 450px;
+      width: auto;
+    }
 
     @media (max-width: 580px) {
       .seance { flex-wrap: wrap; gap: 0.8rem; }
       .seance-divider { display: none; }
-      .seance-actions { width: 100%; flex-direction: row; }
-      .btn-zoom, .btn-inscrire { flex: 1; justify-content: center; }
+      .seance-actions { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .btn-zoom, .btn-inscrire, .btn-resume { flex: 1; justify-content: center; }
       .footer-table td { padding: 0 0.8rem; }
       .footer-table td img { max-width: 80px; max-height: 36px; }
     }
 
     .img-hope {
-      height: 100px;  /* augmente seulement celle-ci */
+      height: 100px;
       width: auto;
     }
-
   </style>
 </head>
 <body>
@@ -401,7 +488,7 @@
     <h1>Évaluation économique en santé :<br>nouvelles questions, nouveaux développements</h1>
     <div class="header-rule"></div>
     <div class="header-subtitle">Séminaire dématérialisé &nbsp;·&nbsp; Accès libre sur inscription</div>
-    <div class="header-organisateurs"><u>Organisateurs :</u> Antoine Bénard (CHU de Bordeaux), Valérie Clément (Université de Montpellier), Marc D'Elbée (Université de Bordeaux), Fabienne Midy (HAS), Clémence Thébaut (Université de Bordeaux), Philippe Tessier (Université de Nantes), Jérome Wittwer (Université de Bordeaux)</div>
+    <div class="header-organisateurs"><u>Organisateurs :</u> Antoine Bénard (CHU de Bordeaux), Valérie Clément (Université de Montpellier), Marc D'Elbée (Université de Bordeaux), Clémence Thébaut (Université de Bordeaux), Philippe Tessier (Université de Nantes), Jérome Wittwer (Université de Bordeaux)</div>
   </div>
 </header>
 
@@ -414,27 +501,20 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
   </p>
 
   <div class="videos-highlight">
-  <div class="videos-label">Archives du séminaire</div>
-
-  <a href="https://www.youtube.com/playlist?list=PLXFjmauiTA-fSUk1q-YyXDOnvD7pN8FUa" class="btn-videos-large">
-    
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/>
-    </svg>
-
-    <span>Voir les vidéos des séminaires passés</span>
-  </a>
-
-  <div class="videos-subtitle">
-    Replays et interventions des séances précédentes
+    <div class="videos-label">Archives du séminaire</div>
+    <a href="https://www.youtube.com/playlist?list=PLXFjmauiTA-fSUk1q-YyXDOnvD7pN8FUa" class="btn-videos-large">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/>
+      </svg>
+      <span>Voir les vidéos des séminaires passés</span>
+    </a>
+    <div class="videos-subtitle">Replays et interventions des séances précédentes</div>
   </div>
-</div>
 
   <div class="section-title">Programme des séances</div>
 
   <div class="seances">
 
-    <!-- SÉANCE 1 -->
     <div class="seance" data-date="2026-03-27">
       <div class="seance-date">
         <div class="seance-jour">27</div>
@@ -454,12 +534,13 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
           <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
           S'inscrire
         </a>
+        
       </div>
     </div>
 
-    <!-- SÉANCE 2 -->
+    
     <div class="seance" data-date="2026-04-17">
-      <div class="seance-date" >
+      <div class="seance-date">
         <div class="seance-jour">17</div>
         <div class="seance-mois">Avril 2026</div>
       </div>
@@ -477,10 +558,10 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
           <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
           S'inscrire
         </a>
+        
       </div>
     </div>
 
-    <!-- SÉANCE 3 -->
     <div class="seance" data-date="2026-06-26">
       <div class="seance-date">
         <div class="seance-jour">26</div>
@@ -488,7 +569,7 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
       </div>
       <div class="seance-divider"></div>
       <div class="seance-content">
-        <div class="seance-titre">Proportional, absolute shortfall, Severity modifier en Grande-Bretagne, avec la participation de <u>Aki Tsuchiya</u> (Sheffield University, SCHARR)</div>
+        <div class="seance-titre">Proportional and absolute shortfalls: The severity modifier in England - Determining societal preferences for valuing severity within NICE evaluations, avec la participation de <u>Aki Tsuchiya</u> (Professor of Health Economics, University of Sheffield, UK)</div>
         <div class="seance-heure">15h00 – 16h30</div>
       </div>
       <div class="seance-actions">
@@ -500,10 +581,17 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
           <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
           S'inscrire
         </a>
+        
+        <button class="btn-resume" onclick="openResume(this)"
+          data-titre="Proportional and absolute shortfalls — Aki Tsuchiya"
+          data-resume="The talk will cover three topics.  First, there will be an introduction to the NICE severity modifier that was adopted in 2022, and allows health gains from treatments of 'severe' conditions to be weighted by 1.2 or 1.7. The design of the modifiers was not based on empirical evidence. The talk will go over the definition of severity (based on shortfalls in future health) and how the weights work.  Second, the talk will outline the ongoing research project on “Determining societal preferences for valuing severity within NICE evaluations”.  We aim to elicit the distributional preferences of the English general public on QALY shortfalls. The final part of the talk will consider some of the methodological challenges involved in this project.">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+          Résumé
+        </button>
+        
       </div>
     </div>
 
-    <!-- SÉANCE 4 -->
     <div class="seance">
       <div class="seance-date" data-date="2026-09-25">
         <div class="seance-jour">25</div>
@@ -523,10 +611,10 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
           <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
           S'inscrire
         </a>
-      </div>
+              </div>
     </div>
 
-    <!-- SÉANCE 5 -->
+    
     <div class="seance" data-date="2026-11-13">
       <div class="seance-date">
         <div class="seance-jour">13</div>
@@ -546,6 +634,7 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
           <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
           S'inscrire
         </a>
+    
       </div>
     </div>
 
@@ -557,48 +646,77 @@ Merci de bien vouloir vous inscrire quelques jours à l'avance pour permettre au
     Pour toute question : <a href="mailto:clemence.thebaut@u-bordeaux.fr">Clémence Thébaut (Université de Bordeaux)</a>
   </div>
   <div class="contact">
-    Mise à jour : 11/05/2026
+    Mise à jour : 24/06/2026
   </div>
 
 </main>
 
 <!-- LOGOS -->
-
 <footer>
   <table class="footer-table">
     <tr>
       <td><img src="Blocmarque HOPE English.jpg" alt="HOPE - Université de Bordeaux" class="img-hope" /></td>
-      </tr>
+    </tr>
   </table>
 </footer>
 
+<!-- =============================================
+     RÉSUMÉ — structure unique réutilisée
+     par tous les boutons "Résumé"
+     ============================================= -->
+<div class="modal-overlay" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="modalTitre">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-label">Résumé de la séance</div>
+        <div class="modal-titre" id="modalTitre"></div>
+      </div>
+      <button class="modal-close" onclick="closeResume()" aria-label="Fermer">
+        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
 <script>
-  // Date du jour sans l'heure
+  /* ── Gestion des dates passées ── */
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   document.querySelectorAll('.seance').forEach(seance => {
-
     const dateString = seance.dataset.date;
-
-    // Découpage manuel YYYY-MM-DD
+    if (!dateString) return;
     const [year, month, day] = dateString.split('-');
-
-    // Création d'une vraie date locale
     const seminarDate = new Date(year, month - 1, day);
-
-    // Si la date est passée
     if (seminarDate < today) {
-
       seance.querySelectorAll('.btn-zoom, .btn-inscrire')
-        .forEach(button => {
-          button.classList.add('btn-disabled');
-
-          // optionnel : changer le texte
-          // button.textContent = "Séminaire terminé";
-        });
+        .forEach(btn => btn.classList.add('btn-disabled'));
     }
   });
+
+  /* ── Modale résumé ── */
+  const modal   = document.getElementById('resumeModal');
+  const mTitre  = document.getElementById('modalTitre');
+  const mBody   = document.getElementById('modalBody');
+
+  function openResume(btn) {
+    mTitre.textContent = btn.dataset.titre  || '';
+    mBody.textContent  = btn.dataset.resume || '';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeResume() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* Fermer en cliquant sur l'overlay */
+  modal.addEventListener('click', e => { if (e.target === modal) closeResume(); });
+
+  /* Fermer avec Échap */
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeResume(); });
 </script>
 
 </body>
